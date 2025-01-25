@@ -32,6 +32,9 @@ public class StudentService {
 
     public StudentDTO getStudentById(Integer id) {
         Student student = repo.findById(id).orElse(null);
+        if (student == null) {
+            throw new UserNotFound();
+        }
         return StudentMapper.INSTANCE.toStudentDTO(student);
     }
 
@@ -60,7 +63,7 @@ public class StudentService {
     public void checkEmail(StudentDTO studentDTO) {
         for (Student student : repo.findAll()) {
             if (student.getEmail().equals(studentDTO.getEmail())) {
-                throw new EmailAlreadyExists("Email already exists");
+                throw new EmailAlreadyExists();
             }
         }
     }
@@ -73,7 +76,7 @@ public class StudentService {
             }
         }
         if (count == 0) {
-            throw new UserNotFound("User not found");
+            throw new UserNotFound();
         }
     }
 }

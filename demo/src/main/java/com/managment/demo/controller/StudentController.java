@@ -2,17 +2,10 @@ package com.managment.demo.controller;
 
 import com.managment.demo.dto.CommonDTO;
 import com.managment.demo.dto.StudentDTO;
-import com.managment.demo.dto.UniversityDTO;
-import com.managment.demo.entity.Student;
-import com.managment.demo.entity.University;
-import com.managment.demo.repository.StudentRepo;
 import com.managment.demo.service.StudentService;
-import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController
@@ -43,7 +36,6 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public CommonDTO deleteStudent(@PathVariable("id") Integer id) {
-
         studentService.deleteStudent(id);
         return new CommonDTO().setMessage("Student deleted successfully").setDate(LocalDateTime.now());
     }
@@ -53,5 +45,4 @@ public class StudentController {
         studentService.updateStudent(id, studentDTO);
         return new CommonDTO().setMessage("Student updated successfully").setDate(LocalDateTime.now());
     }
-
 }
